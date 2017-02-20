@@ -21,6 +21,7 @@ def home():
 def results():
     page = requests.get('https://grabyourwallet.org/Boycott%20These%20Companies.html')
     tree = html.fromstring(page.content)
-    title = tree.xpath('//span[@class="navbar-brand"]/text()')
-
+    print(tree)
+    title = tree.xpath('//a[@class="navbar-brand"]/text()')
+    print(title)
     return render_template('results.html', title=title)
