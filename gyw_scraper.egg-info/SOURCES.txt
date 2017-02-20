@@ -1,0 +1,8 @@
+MANIFEST.in
+gyw_scraper/__init__.py
+gyw_scraper/gyw_scraper.py
+gyw_scraper.egg-info/PKG-INFO
+gyw_scraper.egg-info/SOURCES.txt
+gyw_scraper.egg-info/dependency_links.txt
+gyw_scraper.egg-info/requires.txt
+gyw_scraper.egg-info/top_level.txt
