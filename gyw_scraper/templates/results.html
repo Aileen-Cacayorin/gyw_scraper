@@ -3,7 +3,15 @@
 {% block body%}
 
     <p>Results page</p>
-    <p>{{ table_data }}</p>
+    <!--{% for key, value in input_brand %}-->
+        <!--<h2>{{key}}, {{value}}</h2>-->
+    <!--{% endfor%}-->
+    <p>{% for brand in brands %}
+            <p>{{brand}}</p>
+        {% endfor%}
+    </p>
+
+
 
 
 {% endblock%}
