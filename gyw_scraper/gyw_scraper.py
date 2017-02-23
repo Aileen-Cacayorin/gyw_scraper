@@ -27,19 +27,28 @@ def results():
     # retrieves form input
     brand_name = request.form.get('inputBrand')
 
-    # sends request to
+    # sends request to Grab Your Wallet Site and parses content
     page = requests.get('https://grabyourwallet.org/Boycott%20These%20Companies.html')
     data = page.text
     soup = BeautifulSoup(data, "lxml")
+
+    #finds table and rows
     table = soup.find_all('table')
+
+    #this returns to many rows, need to find way to only find rows with content
     rows = table[0].find_all('tr')
     brands =[]
     for row in rows:
+        #limits which rows are searched
         if len(row)>33:
             info = row.find_all('td')
+            #only applies to rows that returned td
             if len(info)>0:
+                #gets first td in row, where all the brands on page are listed
                 brand = info[0].get_text()
+                #eliminates blank td
                 if brand != "":
+                    #removes extra info in parentheses after brand name
                     brand = re.sub(r"\(.*\)","", brand)
                     brands.append(brand)
         else:
