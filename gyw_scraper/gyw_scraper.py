@@ -53,4 +53,4 @@ def results():
                     brands.append(brand)
         else:
             continue
-    return render_template('results.html', brands=brands)
+    return render_template('results.html', brands=brands, brand_name=brand_name)
