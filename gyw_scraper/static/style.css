@@ -1,0 +1,9 @@
+body {
+    background: #86989B;
+}
+
+.brand-form {
+    max-width: 60%;
+    alignment: center;
+    text-color: red;
+}

@@ -3,7 +3,6 @@ from flask import Flask, request, redirect, render_template
 from lxml import html, etree
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 import re
 
 
