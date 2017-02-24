@@ -3,9 +3,8 @@
 {% block body%}
 
     <p>Results page</p>
-    <!--{% for key, value in input_brand %}-->
-        <!--<h2>{{key}}, {{value}}</h2>-->
-    <!--{% endfor%}-->
+    <h2>Brand: {{ brand_name }}</h2>
+    <h2> {{ message }}</h2>
     <p>{% for brand in brands %}
             <p>{{brand}}</p>
         {% endfor%}

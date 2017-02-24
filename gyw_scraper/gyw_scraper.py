@@ -25,7 +25,10 @@ def home():
 @app.route('/results', methods=['GET', 'POST'])
 def results():
     # retrieves form input
-    brand_name = request.form.get('inputBrand')
+    brand_name = request.form.get('inputBrand').lower()
+
+    #creates regex based on brand_name
+    brand_regex = r"\b(?=\w)" + re.escape(brand_name) + r"\b(?!\w)"
 
     # sends request to Grab Your Wallet Site and parses content
     page = requests.get('https://grabyourwallet.org/Boycott%20These%20Companies.html')
@@ -45,12 +48,27 @@ def results():
             #only applies to rows that returned td
             if len(info)>0:
                 #gets first td in row, where all the brands on page are listed
-                brand = info[0].get_text()
+                brand = info[0].get_text().lower()
                 #eliminates blank td
                 if brand != "":
                     #removes extra info in parentheses after brand name
                     brand = re.sub(r"\(.*\)","", brand)
+                    #removes punctuation from brand
+                    brand = re.sub(r'[^\w\s]', '', brand)
                     brands.append(brand)
         else:
             continue
-    return render_template('results.html', brands=brands, brand_name=brand_name)
+
+        message=""
+        for brand in brands:
+        # searches for brand_name in brands based on brand_regex, not specific enough, ie, will match lord with lord and taylor, better regex rule?
+            # if re.search(brand_regex, brand):
+            #     message = brand_name + " is on the list"
+            #     break
+        # matches string specifically?
+            if re.sub(r'[^\w\s]', '', brand_name) == brand:
+                message = brand_name + " is on the list"
+                break
+            else:
+                message = "no match"
+    return render_template('results.html', brands=brands, brand_name=brand_name, message=message)
