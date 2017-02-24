@@ -8,6 +8,7 @@
         <form action="{{ url_for('results') }}" method=POST class="form-group" id=""brand_form>
             <label for="brand">Enter a brand or company to search:</label>
             <input type="text" class="form-control" name="inputBrand">
+            <input type="hidden" name="brands" value="{{brands}}">
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
