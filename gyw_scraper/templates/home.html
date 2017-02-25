@@ -9,7 +9,7 @@
         <div class="brand-form">
             <form action="{{ url_for('results') }}" method=POST class="form-group">
                 <input type="text" class="form-control" name="inputBrand" placeholder="Enter the company, brand, or store">
-                <input type="hidden" name="brands" value="{{brands}}">
+                <input type="hidden" name="brands" value='{{brands|tojson}}'>
             </form>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

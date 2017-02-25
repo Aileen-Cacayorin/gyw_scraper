@@ -1,5 +1,6 @@
 import os
 from flask import Flask, request, redirect, render_template
+from flask import json
 from lxml import html, etree
 import requests
 from bs4 import BeautifulSoup
@@ -38,10 +39,10 @@ def home():
     return render_template('home.html', brands=brands)
 
 
-@app.route('/results', methods=['GET', 'POST'])
+@app.route('/results', methods=['POST'])
 def results():
     brand_name = request.form.get('inputBrand').lower()  # retrieves form input as string unfortunately. how to pass as list?
-    brands = request.form.get('brands').replace('[', '').replace(']', '').replace(',',"").split("' '")  #removes extra brackets, and commas, splits back into list
+    brands = json.loads(request.form.get('brands'))
     print(brands)
     for brand in brands:
         brand = brand.strip()
