@@ -49,7 +49,7 @@ def results():
     message=""
     for brand in brands:
         if re.sub(r'[^\w\s]', '', brand_name) == brand:
-            message = brand_name + " is on the list"
+            message = brand_name + " is on the boycott list. Shop elsewhere."
             break
         else:
             message = "no match"

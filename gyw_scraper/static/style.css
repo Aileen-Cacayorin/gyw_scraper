@@ -2,8 +2,16 @@ body {
     background: #86989B;
 }
 
+h1 {
+    color: #ff0000;
+}
+
 .brand-form {
     max-width: 60%;
     alignment: center;
-    text-color: red;
+    color: red;
+}
+
+#results {
+    display: none;
 }
