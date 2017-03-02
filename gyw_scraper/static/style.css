@@ -2,16 +2,20 @@ body {
     background: #86989B;
 }
 
-h1 {
-    color: #ff0000;
-}
 
 .brand-form {
     max-width: 60%;
     alignment: center;
-    color: red;
 }
 
-/*#results {*/
-    /*display: none;*/
-/*}*/
+#results {
+    display: none;
+}
+
+#red-message {
+    color: #ff0000;
+}
+
+#green-message {
+    color: green;
+}

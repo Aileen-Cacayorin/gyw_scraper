@@ -27,10 +27,10 @@ def results():
     brand_name = request.args.get('brand_name').lower()
     page = requests.get(
         'https://grabyourwallet.org/Boycott%20These%20Companies.html')  # sends request to Grab Your Wallet Site and parses content
-    stuff = page.text
-    soup = BeautifulSoup(stuff, "lxml")
+    page_info = page.text
+    soup = BeautifulSoup(page_info, "lxml")
     table = soup.find_all('table')  # finds table and rows
-    rows = table[0].find_all('tr')  # this returns to many rows, need to find way to only find rows with content
+    rows = table[0].find_all('tr')  # this returns too many rows, need to find way to only find rows with content
     brands = []
     for row in rows:
         if len(row) > 33:  # limits which rows are searched
@@ -46,12 +46,14 @@ def results():
     message=""
     for brand in brands:
         if re.sub(r'[^\w\s]', '', brand_name) == brand:
-            message = brand_name + " is on the boycott list. Shop elsewhere."
+            message = brand_name.title() + " is on the boycott list. Shop elsewhere."
+            color= "red"
             break
         else:
-            message = "no match"
+            message = brand_name.title() + " is not the boycott list. Happy shopping!"
+            color= "green"
     # return render_template('results.html', brands=brands, brand_name=brand_name, message=message)
-    return jsonify(message=message)
+    return jsonify(message=message, color=color)
 
 
   #creates regex based on brand_name:

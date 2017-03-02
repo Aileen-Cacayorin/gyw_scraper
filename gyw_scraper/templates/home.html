@@ -2,41 +2,23 @@
 
 {% block body%}
 
-<script type="text/javascript">
-  $(function() {
-    var submit_form = function(e) {
-      $.getJSON('/_results', {
-        brand_name: $('input[name="inputBrand"]').val()
-      }, function(data) {
-        $('#message').text(data.message);
-      });
-      return false;
-    };
-    $('button#find').bind('click', submit_form);
-    $('input[type=text]').bind('keydown', function(e) {
-      if (e.keyCode == 13) {
-        submit_form(e);
-      }
-    });
-  });
-</script>
-
     <div class="container">
         <h1 class="brand-form">Grab Your Wallet Search </h1>
         <h3></h3>
     </div>
-    <div class="container input-brand">
+    <div class="container input-brand" id="brand-form">
         <div class="brand-form">
 
-                <input type="text" class="form-control" name="inputBrand" placeholder="Enter the company, brand, or store">
+                <input type="text" class="form-control" name="inputBrand"  placeholder="Enter the company, brand, or store">
 
             <button type="submit" class="btn btn-primary" id="find">Submit</button>
         </div>
     </div>
 
     <div class="container" id="results">
-        <h1>Results will go here</h1>
-        <p><span id="message"></span></p>
+
+        <h1><span id="red-message"></span></h1>
+        <h1><span id="green-message"></span></h1>
 
     </div>
 
