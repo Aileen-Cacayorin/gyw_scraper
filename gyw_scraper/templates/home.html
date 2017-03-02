@@ -1,16 +1,35 @@
 {% extends "layout.html" %}
 
 {% block body%}
+
+<script type="text/javascript">
+  $(function() {
+    var submit_form = function(e) {
+      $.getJSON('/_results', {
+        brand_name: $('input[name="inputBrand"]').val()
+      }, function(data) {
+        $('#message').text(data.message);
+      });
+      return false;
+    };
+    $('button#find').bind('click', submit_form);
+    $('input[type=text]').bind('keydown', function(e) {
+      if (e.keyCode == 13) {
+        submit_form(e);
+      }
+    });
+  });
+</script>
+
     <div class="container">
         <h1 class="brand-form">Grab Your Wallet Search </h1>
         <h3></h3>
     </div>
     <div class="container input-brand">
         <div class="brand-form">
-            <form action="{{ url_for('results') }}" method=POST class="form-group">
+
                 <input type="text" class="form-control" name="inputBrand" placeholder="Enter the company, brand, or store">
-                <input type="hidden" name="brands" value='{{brands|tojson}}'>
-            </form>
+
             <button type="submit" class="btn btn-primary" id="find">Submit</button>
         </div>
     </div>
