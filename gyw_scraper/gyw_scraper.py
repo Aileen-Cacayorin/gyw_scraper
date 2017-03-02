@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, redirect, render_template
-from flask import json
+from flask import json, jsonify
 from lxml import html, etree
 import requests
 from bs4 import BeautifulSoup
@@ -39,13 +39,10 @@ def home():
     return render_template('home.html', brands=brands)
 
 
-@app.route('/results', methods=['POST'])
+@app.route('/results', methods=['GET','POST'])
 def results():
-    brand_name = request.form.get('inputBrand').lower()  # retrieves form input as string unfortunately. how to pass as list?
+    brand_name = request.form.get('inputBrand').lower()
     brands = json.loads(request.form.get('brands'))
-    print(brands)
-    for brand in brands:
-        brand = brand.strip()
     message=""
     for brand in brands:
         if re.sub(r'[^\w\s]', '', brand_name) == brand:
@@ -54,6 +51,7 @@ def results():
         else:
             message = "no match"
     return render_template('results.html', brands=brands, brand_name=brand_name, message=message)
+
 
   #creates regex based on brand_name:
   # brand_regex = r"\b(?=\w)" + re.escape(brand_name) + r"\b(?!\w)"

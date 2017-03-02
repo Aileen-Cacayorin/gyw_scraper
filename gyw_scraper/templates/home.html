@@ -11,13 +11,15 @@
                 <input type="text" class="form-control" name="inputBrand" placeholder="Enter the company, brand, or store">
                 <input type="hidden" name="brands" value='{{brands|tojson}}'>
             </form>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="find">Submit</button>
         </div>
     </div>
 
     <div class="container" id="results">
         <h1>Results will go here</h1>
+        <p><span id="message"></span></p>
 
     </div>
+
 
 {% endblock %}
