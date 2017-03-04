@@ -1,13 +1,26 @@
 body {
-    background: #86989B;
+    background: #0bcace;
 }
 
+.main-title {
+    text-align: center;
+    margin-top: 20%;
+    font-family: 'Acme', sans-serif;
+}
 
 .brand-form {
     max-width: 60%;
     alignment: center;
 }
 
+.brand-input {
+    width: 80%;
+    display: inline;
+}
+
+#inline {
+    display: inline;
+}
 #results {
     display: none;
 }
