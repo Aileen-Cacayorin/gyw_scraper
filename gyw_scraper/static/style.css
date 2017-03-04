@@ -1,11 +1,12 @@
 body {
     background: #0bcace;
+    font-family: 'Acme', sans-serif;
 }
 
 .main-title {
     text-align: center;
     margin-top: 20%;
-    font-family: 'Acme', sans-serif;
+
 }
 
 .brand-form {
@@ -23,6 +24,7 @@ body {
 }
 #results {
     display: none;
+    text-align: center;
 }
 
 #red-message {

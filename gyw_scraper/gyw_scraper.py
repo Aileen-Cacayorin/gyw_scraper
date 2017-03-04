@@ -5,6 +5,7 @@ from lxml import html, etree
 import requests
 from bs4 import BeautifulSoup
 import re
+import string
 
 
 
@@ -46,11 +47,11 @@ def results():
     message=""
     for brand in brands:
         if re.sub(r'[^\w\s]', '', brand_name) == brand:
-            message = brand_name.title() + " is on the boycott list. Shop elsewhere."
+            message = string.capwords(brand_name) + " IS on the boycott list"
             color= "red"
             break
         else:
-            message = brand_name.title() + " is not the boycott list. Happy shopping!"
+            message = string.capwords(brand_name) + " IS NOT the boycott list."
             color= "green"
     # return render_template('results.html', brands=brands, brand_name=brand_name, message=message)
     return jsonify(message=message, color=color)
