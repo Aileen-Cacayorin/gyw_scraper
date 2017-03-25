@@ -1,11 +1,12 @@
 import os
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, render_template
 from flask import json, jsonify
 from lxml import html, etree
 import requests
 from bs4 import BeautifulSoup
 import re
 import string
+import inflect
 
 
 
@@ -27,7 +28,7 @@ def home():
 def results():
     brand_name = request.args.get('brand_name').lower()
     page = requests.get(
-        'https://grabyourwallet.org/Boycott%20These%20Companies.html')  # sends request to Grab Your Wallet Site and parses content
+        'https://grabyourwallet.org/Boycott%20These%20Companies.html')  #sends request to Grab Your Wallet Site and parses content
     page_info = page.text
     soup = BeautifulSoup(page_info, "lxml")
     table = soup.find_all('table')  # finds table and rows
@@ -40,13 +41,14 @@ def results():
                 brand = info[0].get_text().lower()  # gets first td in row, where all the brands on page are listed
                 if brand != "":  # eliminates blank td
                     brand = re.sub(r"\(.*\)", "", brand)  # removes extra info in parentheses after brand name
-                    brand = re.sub(r'[^\w\s]', '', brand)  # removes punctuation from brand
+                    brand = re.sub(r'[^\w\s]', '', brand).strip()  # removes punctuation and whitespace from brand
                     brands.append(brand)
         else:
             continue
     message=""
     for brand in brands:
-        if re.sub(r'[^\w\s]', '', brand_name) == brand:
+        p = inflect.engine()
+        if re.sub(r'[^\w\s]', '', brand_name) == brand or p.plural(re.sub(r'[^\w\s]', '', brand_name)) == brand: #matches input brand or pluralized input brand to brand in list
             message = string.capwords(brand_name) + " IS on the boycott list"
             color= "red"
             break
